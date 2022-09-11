@@ -8,25 +8,11 @@ pipeline {
             }
         }
        
-        stage('custom image build') {
+         stage('BUILD') {
             steps {
-                echo "-=- custom image build -=-"
-                sh "docker build -t dockerpython ."
-                sh "sleep 100"
+                sh 'python app.py'
+                
             }
-        }
-        stage('container run') {
-            steps {
-                echo "-=- container run -=-"
-                sh "docker run -d --name pythoncontainer dockerpython"
-                sh "sleep 100"
-            }
-        }
-        stage('expose') {
-            steps {
-                echo "-=- application publish -=-"
-                sh "docker run -p 5000:5000 dockerpython"
-            }
-        }
-    }
+         }
+    }   
 }
