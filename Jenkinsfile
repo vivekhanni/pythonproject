@@ -11,13 +11,15 @@ pipeline {
         stage('custom image build') {
             steps {
                 echo "-=- custom image build -=-"
-                sh "docker build -t dockerpython ."
+                sh "docker build -t dockerpython ."\
+                sh "sleep 100"
             }
         }
         stage('container run') {
             steps {
                 echo "-=- container run -=-"
                 sh "docker run -d --name pythoncontainer dockerpython"
+                sh "sleep 100"
             }
         }
         stage('expose') {
