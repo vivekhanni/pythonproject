@@ -11,7 +11,7 @@ pipeline {
         stage('custom image build') {
             steps {
                 echo "-=- custom image build -=-"
-                sh "docker build -t dockerpython ."\
+                sh "docker build -t dockerpython ."
                 sh "sleep 100"
             }
         }
