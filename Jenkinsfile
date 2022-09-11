@@ -7,15 +7,34 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'PythonDevOps', url: 'https://github.com/vivekhanni/pythonproject.git']]])
             }
         }
-        stage('BUILD') {
+        stage('container removing') {
             steps {
-                sh 'python app.py'
-                
+                echo "-=- container removing -=-"
+                sh "docker rm -f $(docker ps -a -q)"
             }
         }
-        stage('TEST') {
+       stage('images removing') {
             steps {
-                echo "Testing is successfull"
+                echo "-=- images removing -=-"
+                sh "docker rmi -f $(docker images-a -q)"
+            }
+        }
+        stage('custom image build') {
+            steps {
+                echo "-=- custom image build -=-"
+                sh "docker build -t dockerpython ."
+            }
+        }
+        stage('container run') {
+            steps {
+                echo "-=- container run -=-"
+                sh "docker run -d --name pythoncontainer dockerpython"
+            }
+        }
+        stage('expose') {
+            steps {
+                echo "-=- application publish -=-"
+                sh "docker run -p 5000:5000 dockerpython"
             }
         }
     }
