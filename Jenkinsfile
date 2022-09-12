@@ -20,12 +20,5 @@ pipeline {
                 sh "docker run -d --name pythoncontainer dockerpython"
             }
         }
-                
-        stage('expose') {
-            steps {
-                echo "-=- application publish -=-"
-                sh "docker run -p 5000:5000 dockerpython"
-            }
-        }
     }   
 }
