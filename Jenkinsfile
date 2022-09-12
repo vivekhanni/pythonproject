@@ -7,6 +7,20 @@ pipeline {
             }
         }
        
+        stage('container deletion') {
+            steps {
+                echo "-=- container deletion -=-"
+                sh "docker rm -f pythoncontainer"
+            }
+        }
+        
+        stage('image deletion') {
+            steps {
+                echo "-=- image deletion -=-"
+                sh "docker rmi -f dockerpython"
+            }
+        }
+        
         stage('custom image build') {
             steps {
                 echo "-=- custom image build -=-"
