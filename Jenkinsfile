@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    
-    stage('container deletion') {
+    stages {
+        stage('container deletion') {
             steps {
                 echo "-=- container deletion -=-"
                 sh "docker rm -f pythoncontainer"
@@ -15,7 +15,6 @@ pipeline {
             }
         }
 
-    stages {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'PythonDevOps', url: 'https://github.com/vivekhanni/pythonproject.git']]])
