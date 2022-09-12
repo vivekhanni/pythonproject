@@ -1,6 +1,7 @@
 pipeline {
     agent any
     stages {
+        
         stage('container deletion') {
             steps {
                 echo "-=- container deletion -=-"
@@ -37,7 +38,7 @@ pipeline {
             }
         }
                 
-       stage('expose') {
+        stage('expose') {
             steps {
                 echo "-=- application publish -=-"
                 sh "docker run -p 5000:5000 dockerpython"
