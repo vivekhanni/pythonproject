@@ -22,12 +22,11 @@ pipeline {
             }
         }
                 
-       
-        stage('TEST') {
+       stage('expose') {
             steps {
-                echo "Testing is successfully okay done"
-                
+                echo "-=- application publish -=-"
+                sh "docker run -p 5000:5000 dockerpython"
             }
-         }
+        }
     }   
 }
