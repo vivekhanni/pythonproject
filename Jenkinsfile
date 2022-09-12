@@ -10,21 +10,21 @@ pipeline {
         stage('custom image build') {
             steps {
                 echo "-=- custom image build -=-"
-                sh "sudo docker build -t dockerpython ."
+                sh "docker build -t dockerpython ."
             }
         }
                 
         stage('container run') {
             steps {
                 echo "-=- container run -=-"
-                sh "sudo docker run -d --name pythoncontainer dockerpython"
+                sh "docker run -d --name pythoncontainer dockerpython"
             }
         }
                 
         stage('expose') {
             steps {
                 echo "-=- application publish -=-"
-                sh "sudo docker run -p 5000:5000 dockerpython"
+                sh "docker run -p 5000:5000 dockerpython"
             }
         }
     }   
