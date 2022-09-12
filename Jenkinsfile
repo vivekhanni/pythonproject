@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'PythonDevOps', url: 'https://github.com/vivekhanni/pythonproject.git']]])
+            }
+        }
         
         stage('container deletion') {
             steps {
@@ -15,14 +21,6 @@ pipeline {
                 sh "docker rmi -f dockerpython"
             }
         }
-
-        stage('Checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'PythonDevOps', url: 'https://github.com/vivekhanni/pythonproject.git']]])
-            }
-        }
-        
-         
        
         stage('custom image build') {
             steps {
