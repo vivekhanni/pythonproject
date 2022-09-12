@@ -10,14 +10,14 @@ pipeline {
         stage('container deletion') {
             steps {
                 echo "-=- container deletion -=-"
-                sh "sudo docker rm -f pythoncontainer"
+               // sh "sudo docker rm -f pythoncontainer"
             }
         }
         
         stage('image deletion') {
             steps {
                 echo "-=- image deletion -=-"
-                sh "sudo docker rmi -f dockerpython"
+               // sh "sudo docker rmi -f dockerpython"
             }
         }
         
