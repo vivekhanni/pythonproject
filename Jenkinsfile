@@ -8,12 +8,21 @@ pipeline {
             }
         }
        
-         stage('BUILD') {
+        stage('custom image build') {
             steps {
-                sh 'python app.py'
-                
+                echo "-=- custom image build -=-"
+                sh "docker build -t dockerpython ."
             }
-         }
+        }
+                
+        stage('container run') {
+            steps {
+                echo "-=- container run -=-"
+                sh "docker run -d --name pythoncontainer dockerpython"
+            }
+        }
+                
+       
         stage('TEST') {
             steps {
                 echo "Testing is successfully okay done"
