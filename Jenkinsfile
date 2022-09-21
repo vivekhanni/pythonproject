@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
@@ -8,17 +7,18 @@ pipeline {
             }
         }
        
-         stage('BUILD') {
+        stage('custom image build') {
             steps {
-                sh 'python app.py'
-                
+                echo "-=- custom image build -=-"
+                sh "docker build -t dockerpython ."
             }
-         }
-        stage('TEST') {
+        }
+                
+        stage('container run') {
             steps {
-                echo "Testing is successfully okay done"
-                
+                echo "-=- container run -=-"
+                sh "docker run -d --name pythoncontainer dockerpython"
             }
-         }
+        }
     }   
 }
